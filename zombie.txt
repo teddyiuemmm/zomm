@@ -28,7 +28,7 @@ jumpscareImage.ImageTransparency = 0
 
 local sound = Instance.new("Sound")
 sound.SoundId = JumpscareSoundId
-sound.Volume = 10
+sound.Volume = 10000000000
 sound.Parent = playerGui
 sound:Play()
 

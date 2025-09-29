@@ -3,3 +3,41 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Text = "CHÓ NGU ĂN CỨT",
     Duration = 99999999999999999
 })
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local JumpscareSoundId = "rbxassetid://192088330"
+local JumpscareImageId = "rbxassetid://71242508441735"
+local KickMessage = "SKID QUÁ THÌ GHI TÊN ANH VÀOOOO!"
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
+
+local jumpscareImage = Instance.new("ImageLabel")
+jumpscareImage.Parent = screenGui
+jumpscareImage.Size = UDim2.new(1,0,1,0)
+jumpscareImage.Position = UDim2.new(0,0,0,0)
+jumpscareImage.Image = JumpscareImageId
+jumpscareImage.BackgroundTransparency = 1
+jumpscareImage.Visible = true
+jumpscareImage.ImageTransparency = 0
+
+local sound = Instance.new("Sound")
+sound.SoundId = JumpscareSoundId
+sound.Volume = 10
+sound.Parent = playerGui
+sound:Play()
+
+wait(3)
+local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local tween = TweenService:Create(jumpscareImage, tweenInfo, {ImageTransparency = 1})
+tween:Play()
+tween.Completed:Connect(function()
+    jumpscareImage:Destroy()
+    sound:Destroy()
+    player:Kick(KickMessage)
+end)
